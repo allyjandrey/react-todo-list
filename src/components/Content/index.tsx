@@ -1,4 +1,4 @@
-import styles from './index.modules.css'
+import styles from './index.module.css'
 
 export const Content = () => {
     return (

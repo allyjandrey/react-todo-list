@@ -1,9 +1,10 @@
+import clipboard from '../../assets/clipboard.svg'
 import styles from './index.module.css'
 
 export const NoContent = () => {
     return (
-        <section>
-            <img src="" alt="" />
+        <section className={styles.section_container}>
+            <img src={clipboard} alt="Ícone de clipboard" />
             <p>
                 <strong>Você ainda não tem tarefas cadastradas</strong>
                 Crie tarefas e organize seus itens

@@ -1,5 +1,6 @@
 import styles from './index.module.css'
 import plus from '../../assets/plus.svg'
+import { NoContent } from '../NoContent'
 
 export const Content = () => {
     return (
@@ -23,6 +24,7 @@ export const Content = () => {
                         <span className={styles.span_value}>0</span>
                     </article>
                 </article>
+                <NoContent />
             </main>
         </section>
     )

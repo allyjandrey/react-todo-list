@@ -26,6 +26,12 @@
 }
 
 .button {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
     width: 90px;
     height: 52px;
 
@@ -33,6 +39,7 @@
     color: var(--gray-100);
     border-radius: 8px;
     border: none;
+
     cursor: pointer;
 }
 

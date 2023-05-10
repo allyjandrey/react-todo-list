@@ -5,7 +5,7 @@ export const Content = () => {
         <section className={styles.section_container}>
             <main>
                 <article className={styles.input_container}>
-                    <input type="text" placeholder="Adicione uma nova tarefa"/>
+                    <input className={s} type="text" placeholder="Adicione uma nova tarefa"/>
                     <button>Criar</button>
                 </article>
             </main>

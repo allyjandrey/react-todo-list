@@ -1,4 +1,5 @@
 import logo from '../../assets/logo.svg'
+import styles from './index.module.css'
 
 export const Header = () => {
     return (

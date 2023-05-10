@@ -1,0 +1,30 @@
+.section_container {
+    background-color: var(--gray-500);
+    height: calc(100vh - 200px);
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.input_container {
+    display: flex;
+    gap: 8px;
+
+    margin-top: -30px;
+}
+
+.input {
+    width: 638px;
+    height: 34px;
+
+    color: var(--gray-300);
+    background-color: var(--gray-500);
+    border: 1px solid var(--gray-700);
+    padding: 0px 16px;
+    border-radius: 8px;
+}
+
+.button {
+    
+}

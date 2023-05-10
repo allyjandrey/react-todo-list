@@ -1,8 +1,40 @@
 import styles from './index.module.css'
 import plus from '../../assets/plus.svg'
 import { NoContent } from '../NoContent'
+import { useState } from 'react';
 
 export const Content = () => {
+    const nomeState = useState<string>("Milos");
+    const todoList = useState([
+        {
+            id: '1',
+            description: 'Varrer meu quarto',
+            isDone: false
+        },
+        {
+            id: '2',
+            description: 'Lavar as roupas',
+            isDone: true
+        },
+        {
+            id: '3',
+            description: 'Pagar meus boletos',
+            isDone: false
+        }
+    ]);
+    const array = [
+        {
+            id: '',
+            description: '',
+            isDone: false
+        },
+        {
+            id: '',
+            description: '',
+            isDone: false
+        }
+    ];
+
     return (
         <section className={styles.section_container}>
             <main>

@@ -3,7 +3,7 @@ import styles from './index.module.css'
 
 export const Header = () => {
     return (
-        <header>
+        <header className={styles.header}>
             <img src={logo} alt="Logo principal do sistema" />
         </header>
     )

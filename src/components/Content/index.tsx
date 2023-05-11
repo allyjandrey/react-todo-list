@@ -4,22 +4,27 @@ import { NoContent } from '../NoContent';
 import { TodoList } from '../TodoList';
 import { useState } from 'react';
 
+type Task = {
+    id: string,
+    description: string,
+    isDone: boolean;
+}
+
 export const Content = () => {
-    const nomeState = useState<string>("Milos");
-    const [todoList, setTodoList] = useState([
+    const [tasksList, setTasksList] = useState<Task[]>([
         {
             id: '1',
-            description: 'Varrer meu quarto',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci dolore provident esse fugit dolorem illum cumque odio nulla consectetur similique, necessitatibus sunt magnam repellendus ducimus ad harum in modi quos?',
             isDone: false
         },
         {
             id: '2',
-            description: 'Lavar as roupas',
+            description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi unde suscipit, ipsa eius officiis tempore praesentium quis quidem quod iste alias earum voluptatem consectetur optio nemo repellendus vero nulla minima.',
             isDone: true
         },
         {
             id: '3',
-            description: 'Pagar meus boletos',
+            description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad labore praesentium totam dolorum explicabo officia tempore hic esse facere dicta nihil soluta eveniet, exercitationem autem. Ea molestias ipsam magni aspernatur!',
             isDone: false
         }
     ]);
@@ -46,7 +51,7 @@ export const Content = () => {
                     </article>
                 </article>
 
-                {todoList.length == 0 ? <NoContent /> : <TodoList />}
+                {tasksList.length == 0 ? <NoContent /> : <TodoList list={tasksList}/>}
                 <NoContent />
             </main>
         </section>

@@ -2,7 +2,7 @@ import styles from './index.module.css';
 import plus from '../../assets/plus.svg';
 import { NoContent } from '../NoContent';
 import { TodoList } from '../TodoList';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 type Task = {
     id: string,
@@ -32,12 +32,21 @@ export const Content = () => {
         }
     ]);
 
+    const addTaskOnList = () => {
+        const newTask = {
+            id: '5',
+            description,
+            isDone: false,
+        }
+        setTasksList((currentValue) => [...currentValue, newTask]);
+    }
+
     return (
         <section className={styles.section_container}>
             <main>
                 <article className={styles.input_container}>
-                    <input className={styles.input} type="text" placeholder="Adicione uma nova tarefa" onChange={() => setDescription()} />
-                    <button className={styles.button}>
+                    <input className={styles.input} type="text" placeholder="Adicione uma nova tarefa" onChange={(event : ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)} />
+                    <button className={styles.button} onClick={() => addTaskOnList()}>
                         Criar
                         <img
                             src={plus}

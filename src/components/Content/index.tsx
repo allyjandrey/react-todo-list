@@ -11,6 +11,9 @@ type Task = {
 }
 
 export const Content = () => {
+
+    const [description, setDescription,] = useState<string>("")
+
     const [tasksList, setTasksList] = useState<Task[]>([
         {
             id: '1',
@@ -33,7 +36,7 @@ export const Content = () => {
         <section className={styles.section_container}>
             <main>
                 <article className={styles.input_container}>
-                    <input className={styles.input} type="text" placeholder="Adicione uma nova tarefa" />
+                    <input className={styles.input} type="text" placeholder="Adicione uma nova tarefa" onChange={() => setDescription()} />
                     <button className={styles.button}>
                         Criar
                         <img
@@ -50,9 +53,7 @@ export const Content = () => {
                         <span className={styles.span_value}>0</span>
                     </article>
                 </article>
-
                 {tasksList.length == 0 ? <NoContent /> : <TodoList list={tasksList}/>}
-                <NoContent />
             </main>
         </section>
     )

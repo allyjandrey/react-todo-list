@@ -1,11 +1,12 @@
-import styles from './index.module.css'
-import plus from '../../assets/plus.svg'
-import { NoContent } from '../NoContent'
+import styles from './index.module.css';
+import plus from '../../assets/plus.svg';
+import { NoContent } from '../NoContent';
+import { TodoList } from '../TodoList';
 import { useState } from 'react';
 
 export const Content = () => {
     const nomeState = useState<string>("Milos");
-    const todoList = useState([
+    const [todoList, setTodoList] = useState([
         {
             id: '1',
             description: 'Varrer meu quarto',
@@ -22,18 +23,6 @@ export const Content = () => {
             isDone: false
         }
     ]);
-    const array = [
-        {
-            id: '',
-            description: '',
-            isDone: false
-        },
-        {
-            id: '',
-            description: '',
-            isDone: false
-        }
-    ];
 
     return (
         <section className={styles.section_container}>
@@ -56,6 +45,8 @@ export const Content = () => {
                         <span className={styles.span_value}>0</span>
                     </article>
                 </article>
+
+                {todoList.length == 0 ? <NoContent /> : <TodoList />}
                 <NoContent />
             </main>
         </section>

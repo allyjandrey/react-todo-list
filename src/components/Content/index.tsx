@@ -3,6 +3,7 @@ import plus from '../../assets/plus.svg';
 import { NoContent } from '../NoContent';
 import { TodoList } from '../TodoList';
 import { ChangeEvent, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 type Task = {
     id: string,
@@ -34,9 +35,9 @@ export const Content = () => {
 
     const addTaskOnList = () => {
         const newTask = {
-            id: '5',
+            id: uuidv4(),
             description,
-            isDone: false,
+            isDone: false
         }
         setTasksList((currentValue) => [...currentValue, newTask]);
     }

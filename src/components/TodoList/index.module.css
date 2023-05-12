@@ -24,11 +24,23 @@
 .text {
     color: var(--gray-100);
 
-    min-width: 680px;
+    min-width: 660px;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 140%;
+}
+
+.img {
+    width: auto;
+    height: 14px;
+    padding: 6px;
+}
+
+.img:hover {
+    cursor: pointer;
+    background-color: var(--gray-400);
+    border-radius: 4px;
 }
 
 input[type="checkbox"] {

@@ -4,7 +4,7 @@ import styles from './index.module.css';
 
 interface TodoListProps {
     list: Task[];
-    onDelete: () => void
+    onDelete: (id: string) => void
 }
 
 export const TodoList = ({list, onDelete} : TodoListProps) => {
@@ -14,7 +14,7 @@ export const TodoList = ({list, onDelete} : TodoListProps) => {
             <article key={task.id} className={styles.content_container}>
             <input type="checkbox" id={task.id} defaultChecked={task.isDone} />
             <p className={styles.text}>{task.description}</p>
-            <img src={trash} alt="Ícone de lixeira" onClick={onDelete}/>
+            <img className={styles.img} src={trash} alt="Ícone de lixeira" onClick={() => onDelete(task.id)}/>
         </article>))}
             
         </section>

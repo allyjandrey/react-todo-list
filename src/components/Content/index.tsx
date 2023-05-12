@@ -23,7 +23,7 @@ export const Content = () => {
         {
             id: '2',
             description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi unde suscipit, ipsa eius officiis tempore praesentium quis quidem quod iste alias earum voluptatem consectetur optio nemo repellendus vero nulla minima.',
-            isDone: true
+            isDone: false
         },
         {
             id: '3',
@@ -41,8 +41,8 @@ export const Content = () => {
         setTasksList((currentValue) => [...currentValue, newTask]);
     }
 
-    const removeTaskOnList = () => {
-        
+    const removeTaskOnList = (id: string) => {
+        setTasksList((currentValue) => currentValue.filter(task => task.id !== id))
     }
 
     return (

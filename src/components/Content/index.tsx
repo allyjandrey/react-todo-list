@@ -41,6 +41,10 @@ export const Content = () => {
         setTasksList((currentValue) => [...currentValue, newTask]);
     }
 
+    const removeTaskOnList = () => {
+        
+    }
+
     return (
         <section className={styles.section_container}>
             <main>
@@ -62,7 +66,7 @@ export const Content = () => {
                         <span className={styles.span_value}>0</span>
                     </article>
                 </article>
-                {tasksList.length == 0 ? <NoContent /> : <TodoList list={tasksList}/>}
+                {tasksList.length == 0 ? <NoContent /> : <TodoList onDelete={removeTaskOnList} list={tasksList}/>}
             </main>
         </section>
     )

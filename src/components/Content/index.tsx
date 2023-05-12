@@ -2,7 +2,8 @@ import styles from './index.module.css';
 import plus from '../../assets/plus.svg';
 import { NoContent } from '../NoContent';
 import { TodoList } from '../TodoList';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 type Task = {
     id: string,
@@ -23,7 +24,7 @@ export const Content = () => {
         {
             id: '2',
             description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi unde suscipit, ipsa eius officiis tempore praesentium quis quidem quod iste alias earum voluptatem consectetur optio nemo repellendus vero nulla minima.',
-            isDone: true
+            isDone: false
         },
         {
             id: '3',
@@ -32,12 +33,25 @@ export const Content = () => {
         }
     ]);
 
+    const addTaskOnList = () => {
+        const newTask = {
+            id: uuidv4(),
+            description,
+            isDone: false
+        }
+        setTasksList((currentValue) => [...currentValue, newTask]);
+    }
+
+    const removeTaskOnList = (id: string) => {
+        setTasksList((currentValue) => currentValue.filter(task => task.id !== id))
+    }
+
     return (
         <section className={styles.section_container}>
             <main>
                 <article className={styles.input_container}>
-                    <input className={styles.input} type="text" placeholder="Adicione uma nova tarefa" onChange={() => setDescription()} />
-                    <button className={styles.button}>
+                    <input className={styles.input} type="text" placeholder="Adicione uma nova tarefa" onChange={(event : ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)} />
+                    <button className={styles.button} onClick={() => addTaskOnList()}>
                         Criar
                         <img
                             src={plus}
@@ -53,7 +67,7 @@ export const Content = () => {
                         <span className={styles.span_value}>0</span>
                     </article>
                 </article>
-                {tasksList.length == 0 ? <NoContent /> : <TodoList list={tasksList}/>}
+                {tasksList.length == 0 ? <NoContent /> : <TodoList onDelete={removeTaskOnList} list={tasksList}/>}
             </main>
         </section>
     )

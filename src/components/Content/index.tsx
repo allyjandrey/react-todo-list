@@ -33,6 +33,10 @@ export const Content = () => {
         }
     ]);
 
+    const taskDone = tasksList.filter((task) => {
+        return task.isDone !== false
+    })
+
     const addTaskOnList = () => {
         const newTask = {
             id: uuidv4(),
@@ -73,11 +77,11 @@ export const Content = () => {
                 <article className={styles.content_header}>
                     <article className={styles.tasks_container}>
                         <p className={styles.tasks_created}>Tarefas Criadas</p>
-                        <span className={styles.span_value}>0</span>
+                        <span className={styles.span_value}>{tasksList.length}</span>
                     </article>
                     <article className={styles.tasks_container}>
                         <p className={styles.tasks_done}>Concluídas</p>
-                        <span className={styles.span_value}>0</span>
+                        <span className={styles.span_value}>{taskDone.length} de {tasksList.length}</span>
                     </article>
                 </article>
                 {tasksList.length == 0 ? <NoContent /> : <TodoList onDelete={removeTaskOnList} onChangeCheckbox={changeStatusCheckbox} list={tasksList} />}

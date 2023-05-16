@@ -37,6 +37,7 @@ export const Content = () => {
         return task.isDone !== false
     })
 
+    const disabledButton = !description.length;
     const addTaskOnList = () => {
         const newTask = {
             id: uuidv4(),
@@ -44,6 +45,7 @@ export const Content = () => {
             isDone: false
         }
         setTasksList((currentValue) => [...currentValue, newTask]);
+        setDescription('')
     }
 
     const removeTaskOnList = (id: string) => {
@@ -59,7 +61,7 @@ export const Content = () => {
                 }
             }
             return task;
-        });
+        }); 
         setTasksList(elements)
     }
 
@@ -67,8 +69,8 @@ export const Content = () => {
         <section className={styles.section_container}>
             <main>
                 <article className={styles.input_container}>
-                    <input className={styles.input} type="text" placeholder="Adicione uma nova tarefa" onChange={(event: ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)} />
-                    <button className={styles.button} onClick={() => addTaskOnList()}>
+                    <input className={styles.input} type="text" value={description} placeholder="Adicione uma nova tarefa" onChange={(event: ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)} />
+                    <button className={styles.button} disabled={disabledButton} onClick={() => addTaskOnList()}>
                         Criar
                         <img
                             src={plus}

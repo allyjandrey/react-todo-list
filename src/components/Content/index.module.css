@@ -56,6 +56,11 @@
     filter: brightness(1.25);
 }
 
+.button:disabled {
+    filter: grayscale(100%);
+    cursor: not-allowed;
+}
+
 .content_header {
     display: flex;
 

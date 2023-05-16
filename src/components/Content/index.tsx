@@ -54,14 +54,14 @@ export const Content = () => {
 
     const changeStatusCheckbox = (id: string) => {
         const elements = tasksList.map((task) => {
-            if(task.id == id){
+            if (task.id == id) {
                 return {
                     ...task,
                     isDone: !task.isDone
                 }
             }
             return task;
-        }); 
+        });
         setTasksList(elements)
     }
 
@@ -69,8 +69,15 @@ export const Content = () => {
         <section className={styles.section_container}>
             <main>
                 <article className={styles.input_container}>
-                    <input className={styles.input} type="text" value={description} placeholder="Adicione uma nova tarefa" onChange={(event: ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)} />
-                    <button className={styles.button} disabled={disabledButton} onClick={() => addTaskOnList()}>
+                    <input
+                        className={styles.input}
+                        type="text"
+                        value={description}
+                        placeholder="Adicione uma nova tarefa"
+                        onChange={(event: ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)} />
+                    <button
+                        className={styles.button}
+                        disabled={disabledButton} onClick={() => addTaskOnList()}>
                         Criar
                         <img
                             src={plus}

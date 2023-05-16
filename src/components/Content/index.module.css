@@ -1,6 +1,7 @@
 .section_container {
     background-color: var(--gray-500);
-    height: calc(100vh - 200px);
+    min-height: calc(100vh - 200px);
+    padding-bottom: 70px;
 
     display: flex;
     align-items: flex-start;

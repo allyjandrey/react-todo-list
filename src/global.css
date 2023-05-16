@@ -12,6 +12,7 @@
   --gray-100: #F2F2F2;
   
   --purple: #8284FA;
+  --purple-dark: #5E60CE;
   --blue: #4EA8DE;
   --blue-dark: #1E6F9F;
 
@@ -23,4 +24,8 @@ body {
   margin: 0;
   padding: 0;
   border: 0;
+}
+
+a {
+  text-decoration: none;
 }

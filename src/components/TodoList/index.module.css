@@ -28,7 +28,13 @@
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    line-height: 140%;
+}
+
+.text_scratched {
+    color: var(--gray-300);
+    text-decoration: line-through;
+    font-size: 14px;
+    min-width: 660px;
 }
 
 .img {

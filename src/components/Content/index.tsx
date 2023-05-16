@@ -29,7 +29,7 @@ export const Content = () => {
         {
             id: '3',
             description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad labore praesentium totam dolorum explicabo officia tempore hic esse facere dicta nihil soluta eveniet, exercitationem autem. Ea molestias ipsam magni aspernatur!',
-            isDone: false
+            isDone: true
         }
     ]);
 
@@ -46,11 +46,24 @@ export const Content = () => {
         setTasksList((currentValue) => currentValue.filter(task => task.id !== id))
     }
 
+    const changeStatusCheckbox = (id: string) => {
+        const elements = tasksList.map((task) => {
+            if(task.id == id){
+                return {
+                    ...task,
+                    isDone: !task.isDone
+                }
+            }
+            return task;
+        });
+        setTasksList(elements)
+    }
+
     return (
         <section className={styles.section_container}>
             <main>
                 <article className={styles.input_container}>
-                    <input className={styles.input} type="text" placeholder="Adicione uma nova tarefa" onChange={(event : ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)} />
+                    <input className={styles.input} type="text" placeholder="Adicione uma nova tarefa" onChange={(event: ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)} />
                     <button className={styles.button} onClick={() => addTaskOnList()}>
                         Criar
                         <img
@@ -67,7 +80,7 @@ export const Content = () => {
                         <span className={styles.span_value}>0</span>
                     </article>
                 </article>
-                {tasksList.length == 0 ? <NoContent /> : <TodoList onDelete={removeTaskOnList} list={tasksList}/>}
+                {tasksList.length == 0 ? <NoContent /> : <TodoList onDelete={removeTaskOnList} onChangeCheckbox={changeStatusCheckbox} list={tasksList} />}
             </main>
         </section>
     )

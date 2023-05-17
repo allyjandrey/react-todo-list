@@ -29,15 +29,22 @@ export const Content = () => {
             description,
             isDone: false
         }
-        setTasksList((currentValue) => [...currentValue, newTask]);
-        setDescription('')
+        api.post("tasks", newTask).then(response => setTasksList((currentValue) => [...currentValue, response.data])).finally(() => setDescription(''));
     }
-    
+
     const removeTaskOnList = (id: string) => {
-        setTasksList((currentValue) => currentValue.filter(task => task.id !== id))
+        api.delete(`tasks/${id}`).then(() => setTasksList((currentValue) => currentValue.filter(task => task.id !== id)));
     }
 
     const changeStatusCheckbox = (id: string) => {
+        const task = tasksList.find(task => task.id == id);
+
+        if (task) {
+            api.patch(`tasks/${id}`, {
+                isDone: !task.isDone
+            });
+        }
+
         const elements = tasksList.map((task) => {
             if (task.id == id) {
                 return {
@@ -52,7 +59,7 @@ export const Content = () => {
 
     useEffect(() => {
         api.get("tasks").then((response) =>
-        setTasksList(response.data as Task[]));
+            setTasksList(response.data as Task[]));
     }, []);
 
     return (

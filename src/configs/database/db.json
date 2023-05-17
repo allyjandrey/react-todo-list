@@ -15,11 +15,5 @@
             "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad labore praesentium totam dolorum explicabo officia tempore hic esse facere dicta nihil soluta eveniet, exercitationem autem. Ea molestias ipsam magni aspernatur!",
             "isDone": false
         }
-    ],
-    "users": [
-        {
-            "nome": "milos",
-            "isAdmin": true
-        }
     ]
 }

@@ -2,8 +2,9 @@ import styles from './index.module.css';
 import plus from '../../assets/plus.svg';
 import { NoContent } from '../NoContent';
 import { TodoList } from '../TodoList';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { api } from '../../configs/api'
 
 type Task = {
     id: string,
@@ -15,23 +16,7 @@ export const Content = () => {
 
     const [description, setDescription,] = useState<string>("")
 
-    const [tasksList, setTasksList] = useState<Task[]>([
-        {
-            id: '1',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci dolore provident esse fugit dolorem illum cumque odio nulla consectetur similique, necessitatibus sunt magnam repellendus ducimus ad harum in modi quos?',
-            isDone: false
-        },
-        {
-            id: '2',
-            description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi unde suscipit, ipsa eius officiis tempore praesentium quis quidem quod iste alias earum voluptatem consectetur optio nemo repellendus vero nulla minima.',
-            isDone: false
-        },
-        {
-            id: '3',
-            description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad labore praesentium totam dolorum explicabo officia tempore hic esse facere dicta nihil soluta eveniet, exercitationem autem. Ea molestias ipsam magni aspernatur!',
-            isDone: true
-        }
-    ]);
+    const [tasksList, setTasksList] = useState<Task[]>([])
 
     const taskDone = tasksList.filter((task) => {
         return task.isDone !== false
@@ -47,7 +32,7 @@ export const Content = () => {
         setTasksList((currentValue) => [...currentValue, newTask]);
         setDescription('')
     }
-
+    
     const removeTaskOnList = (id: string) => {
         setTasksList((currentValue) => currentValue.filter(task => task.id !== id))
     }
@@ -64,6 +49,11 @@ export const Content = () => {
         });
         setTasksList(elements)
     }
+
+    useEffect(() => {
+        api.get("tasks").then((response) =>
+        setTasksList(response.data as Task[]));
+    }, []);
 
     return (
         <section className={styles.section_container}>

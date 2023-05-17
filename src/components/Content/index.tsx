@@ -29,8 +29,7 @@ export const Content = () => {
             description,
             isDone: false
         }
-        setTasksList((currentValue) => [...currentValue, newTask]);
-        setDescription('')
+        api.post("tasks", newTask).then(response => setTasksList((currentValue) => [...currentValue, response.data])).finally(() => setDescription(''));
     }
     
     const removeTaskOnList = (id: string) => {

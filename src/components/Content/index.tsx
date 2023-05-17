@@ -33,7 +33,7 @@ export const Content = () => {
     }
     
     const removeTaskOnList = (id: string) => {
-        api.delete("tasks/${id}").then(() => setTasksList((currentValue) => currentValue.filter(task => task.id !== id)));
+        api.delete(`tasks/${id}`).then(() => setTasksList((currentValue) => currentValue.filter(task => task.id !== id)));
     }
 
     const changeStatusCheckbox = (id: string) => {

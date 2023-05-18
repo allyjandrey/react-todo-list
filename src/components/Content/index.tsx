@@ -3,22 +3,18 @@ import plus from '../../assets/plus.svg';
 import { NoContent } from '../NoContent';
 import { TodoList } from '../TodoList';
 import { ChangeEvent, useEffect, useState } from 'react';
+import { Task } from '../../models/Task';
 import { v4 as uuidv4 } from 'uuid';
 import { api } from '../../configs/api'
-
-type Task = {
-    id: string,
-    description: string,
-    isDone: boolean;
-}
+import useToDoContext from '../../hooks/useToDoContext';
 
 export const Content = () => {
 
     const [description, setDescription,] = useState<string>("")
 
-    const [tasksList, setTasksList] = useState<Task[]>([])
+    const { taskListState, setTaskListState } = useToDoContext()
 
-    const taskDone = tasksList.filter((task) => {
+    const taskDone = taskListState.filter((task) => {
         return task.isDone !== false
     })
 
@@ -29,15 +25,15 @@ export const Content = () => {
             description,
             isDone: false
         }
-        api.post("tasks", newTask).then(response => setTasksList((currentValue) => [...currentValue, response.data])).finally(() => setDescription(''));
+        api.post("tasks", newTask).then(response => setTaskListState((currentValue) => [...currentValue, response.data])).finally(() => setDescription(''));
     }
 
     const removeTaskOnList = (id: string) => {
-        api.delete(`tasks/${id}`).then(() => setTasksList((currentValue) => currentValue.filter(task => task.id !== id)));
+        api.delete(`tasks/${id}`).then(() => setTaskListState((currentValue) => currentValue.filter(task => task.id !== id)));
     }
 
     const changeStatusCheckbox = (id: string) => {
-        const task = tasksList.find(task => task.id == id);
+        const task = taskListState.find(task => task.id == id);
 
         if (task) {
             api.patch(`tasks/${id}`, {
@@ -45,7 +41,7 @@ export const Content = () => {
             });
         }
 
-        const elements = tasksList.map((task) => {
+        const elements = taskListState.map((task) => {
             if (task.id == id) {
                 return {
                     ...task,
@@ -54,12 +50,12 @@ export const Content = () => {
             }
             return task;
         });
-        setTasksList(elements)
+        setTaskListState(elements)
     }
 
     useEffect(() => {
         api.get("tasks").then((response) =>
-            setTasksList(response.data as Task[]));
+            setTaskListState(response.data as Task[]));
     }, []);
 
     return (
@@ -83,14 +79,14 @@ export const Content = () => {
                 <article className={styles.content_header}>
                     <article className={styles.tasks_container}>
                         <p className={styles.tasks_created}>Tarefas Criadas</p>
-                        <span className={styles.span_value}>{tasksList.length}</span>
+                        <span className={styles.span_value}>{taskListState.length}</span>
                     </article>
                     <article className={styles.tasks_container}>
                         <p className={styles.tasks_done}>Concluídas</p>
-                        <span className={styles.span_value}>{taskDone.length} de {tasksList.length}</span>
+                        <span className={styles.span_value}>{taskDone.length} de {taskListState.length}</span>
                     </article>
                 </article>
-                {tasksList.length == 0 ? <NoContent /> : <TodoList onDelete={removeTaskOnList} onChangeCheckbox={changeStatusCheckbox} list={tasksList} />}
+                {taskListState.length == 0 ? <NoContent /> : <TodoList onDelete={removeTaskOnList} onChangeCheckbox={changeStatusCheckbox}/>}
             </main>
         </section>
     )

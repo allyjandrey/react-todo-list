@@ -5,7 +5,7 @@ type ToDoContextProviderProps = {
     children: React.ReactNode
 }
 
-type ToDoContextProps = {
+export type ToDoContextProps = {
     taskListState: Task[],
     setTaskListState: React.Dispatch<React.SetStateAction<Task[]>>;
 }

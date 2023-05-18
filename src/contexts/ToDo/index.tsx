@@ -1,4 +1,4 @@
-import React, { Children, createContext, useState } from "react";
+import React, {createContext, useState } from "react";
 import { Task } from "../../models/Task";
 
 type ToDoContextProviderProps = {

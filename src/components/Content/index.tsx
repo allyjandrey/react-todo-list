@@ -7,6 +7,7 @@ import { Task } from '../../models/Task';
 import { v4 as uuidv4 } from 'uuid';
 import { api } from '../../configs/api'
 import useToDoContext from '../../hooks/useToDoContext';
+import { Toast } from '../Toast';
 
 export const Content = () => {
 
@@ -87,6 +88,8 @@ export const Content = () => {
                     </article>
                 </article>
                 {taskListState.length == 0 ? <NoContent /> : <TodoList onDelete={removeTaskOnList} onChangeCheckbox={changeStatusCheckbox}/>}
+
+                <Toast message='Tarefa adicionada com sucesso' type="success" />
             </main>
         </section>
     )

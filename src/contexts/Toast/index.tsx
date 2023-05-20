@@ -10,21 +10,30 @@ type Toast = {
     type: 'success' | 'danger';
 }
 
-type ToastContext = {
+export type ToastContextProps = {
     isHidden: boolean;
     showToast(data: Toast): void;
 }
 
-const ToastContext = createContext<ToastContext>({
+const ToastContext = createContext<ToastContextProps>({
     isHidden: false,
     showToast: () => { }
-} as ToastContext)
+} as ToastContextProps)
 
 const ToastProvider = ({ children }: ToastProviderProps) => {
 
     const [isHidden, setIsHidden] = useState<boolean>(true);
+    const [toast, setToast] = useState<Toast>({
+        message: '',
+        type: 'success'
+    })
 
     const showToast = ({ message, type }: Toast) => {
+        setToast({
+            message,
+            type
+        })
+
         setIsHidden(false);
 
         setTimeout(() => {
@@ -34,8 +43,12 @@ const ToastProvider = ({ children }: ToastProviderProps) => {
 
     return (
         <ToastContext.Provider value={{ isHidden, showToast }}>
-            {!isHidden && <Toast message='Tarefa adicionada com sucesso' type="success" />}
+            {!isHidden && <Toast message={toast.message} type={toast.type} />}
             {children}
         </ToastContext.Provider>
     )
 }
+
+export { ToastProvider };
+
+export default ToastContext;

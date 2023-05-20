@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import styles from './index.module.css'
+import { useToast } from '../../hooks/useToast';
 
 type ToastProps = {
     message: string;
@@ -7,17 +7,7 @@ type ToastProps = {
 }
 
 export const Toast = ({ message, type }: ToastProps) => {
-    const [isHidden, setIsHidden] = useState<boolean>(true);
-
-    const toggleToast = () => {
-        setIsHidden(false);
-
-        setTimeout(() => {
-            setIsHidden(true);
-        }, 2800);
-    }
-
-    useEffect(() => toggleToast(), [])
+    const { isHidden } = useToast();
 
     return (
         <aside className={isHidden ? styles.container : styles.container_show}>

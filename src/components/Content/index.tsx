@@ -7,13 +7,15 @@ import { Task } from '../../models/Task';
 import { v4 as uuidv4 } from 'uuid';
 import { api } from '../../configs/api'
 import useToDoContext from '../../hooks/useToDoContext';
-import { Toast } from '../Toast';
+import { useToast } from '../../hooks/useToast';
 
 export const Content = () => {
 
     const [description, setDescription,] = useState<string>("")
 
     const { taskListState, setTaskListState } = useToDoContext()
+
+    const { showToast } = useToast();
 
     const taskDone = taskListState.filter((task) => {
         return task.isDone !== false
@@ -26,7 +28,14 @@ export const Content = () => {
             description,
             isDone: false
         }
-        api.post("tasks", newTask).then(response => setTaskListState((currentValue) => [...currentValue, response.data])).finally(() => setDescription(''));
+        api.post("tasks", newTask).then(response => setTaskListState((currentValue) => [...currentValue, response.data]))
+            .finally(() => {
+                setDescription('')
+                showToast({
+                    message: "Tarefa adicionada com sucesso",
+                    type: "success"
+                })
+            });
     }
 
     const removeTaskOnList = (id: string) => {
@@ -87,9 +96,8 @@ export const Content = () => {
                         <span className={styles.span_value}>{taskDone.length} de {taskListState.length}</span>
                     </article>
                 </article>
-                {taskListState.length == 0 ? <NoContent /> : <TodoList onDelete={removeTaskOnList} onChangeCheckbox={changeStatusCheckbox}/>}
+                {taskListState.length == 0 ? <NoContent /> : <TodoList onDelete={removeTaskOnList} onChangeCheckbox={changeStatusCheckbox} />}
 
-                <Toast message='Tarefa adicionada com sucesso' type="success" />
             </main>
         </section>
     )

@@ -1,4 +1,4 @@
-import { useRouteError } from "react-router-dom";
+import { Link, useRouteError } from "react-router-dom";
 import styles from './index.module.css'
 
 type ErrorResponse = {
@@ -19,7 +19,8 @@ export default function NotFound() {
             <p>
                 <i>{error.statusText || error.message}</i>
             </p>
-            <button className={styles.button}> Voltar </button>
+            <Link to={`/`}><button className={styles.button}>
+                Voltar</button></Link>
         </section>
     );
 }

@@ -33,7 +33,7 @@ export const Content = () => {
                 setDescription('')
                 showToast({
                     message: "Tarefa adicionada com sucesso",
-                    type: "success"
+                    type: 'success'
                 })
             });
     }

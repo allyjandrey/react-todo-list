@@ -1,28 +1,39 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './global.css';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import App from './App';
-import NotFound from './components/NotFound';
-import LandingPage from './components/LandingPage';
+
+const App = lazy(() => import('./App'))
+const NotFound = lazy(() => import('./components/NotFound'))
+const LandingPage = lazy(() => import('./components/LandingPage'))
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <LandingPage />
+      <Suspense fallback={<div>Loading...</div>}>
+        <LandingPage />
+      </Suspense>
     ),
-    errorElement: <NotFound />
+    errorElement: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <NotFound />
+      </Suspense>
+    ),
   },
   {
     path: "/to-do",
     element: (
-    <App />
+      <Suspense fallback={<div>Loading...</div>}>
+        <App />
+      </Suspense>
     ),
-    errorElement: <NotFound />
+    errorElement: <Suspense fallback={<div>Loading...</div>}>
+      <NotFound />
+    </Suspense>
   },
 ]);
 

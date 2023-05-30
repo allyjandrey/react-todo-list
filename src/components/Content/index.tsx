@@ -28,7 +28,8 @@ export const Content = () => {
             description,
             isDone: false
         }
-        api.post("tasks", newTask).then(response => setTaskListState((currentValue) => [...currentValue, response.data]))
+        api.post("tasks", newTask)
+            .then(response => setTaskListState((currentValue) => [...currentValue, response.data]))
             .finally(() => {
                 setDescription('')
                 showToast({
@@ -39,7 +40,14 @@ export const Content = () => {
     }
 
     const removeTaskOnList = (id: string) => {
-        api.delete(`tasks/${id}`).then(() => setTaskListState((currentValue) => currentValue.filter(task => task.id !== id)));
+        api.delete(`tasks/${id}`)
+            .then(() => setTaskListState((task) => task.filter(task => task.id !== id)))
+            .finally(() => {
+                showToast({
+                    message: "Tarefa removida com sucesso",
+                    type: 'danger'
+                })
+            })
     }
 
     const changeStatusCheckbox = (id: string) => {
